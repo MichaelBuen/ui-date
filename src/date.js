@@ -15,20 +15,20 @@ function convertTimezoneToLocal(date, timezone, reverse) {
 	return addDateMinutes(date, reverse * (timezoneOffset - dateTimezoneOffset));
 }
 
+//https://github.com/angular/angular.js/blob/622c42169699ec07fc6daaa19fe6d224e5d2f70e/src/Angular.js#L1207
+function timezoneToOffset(timezone, fallback) {
+	timezone = timezone.replace(/:/g, '');
+	var requestedTimezoneOffset = Date.parse('Jan 01, 1970 00:00:00 ' + timezone) / 60000;
+	return isNaN(requestedTimezoneOffset) ? fallback : requestedTimezoneOffset;
+}    
+
 export default angular.module('ui.date', [])
   .constant('uiDateConfig', {})
   .constant('uiDateFormatConfig', '')
   .factory('uiDateConverter', ['uiDateFormatConfig', function(uiDateFormatConfig) {
     
 
-    
-    //https://github.com/angular/angular.js/blob/622c42169699ec07fc6daaa19fe6d224e5d2f70e/src/Angular.js#L1207
-    function timezoneToOffset(timezone, fallback) {
-      timezone = timezone.replace(/:/g, '');
-      var requestedTimezoneOffset = Date.parse('Jan 01, 1970 00:00:00 ' + timezone) / 60000;
-      return isNaN(requestedTimezoneOffset) ? fallback : requestedTimezoneOffset;
-    }    
-    
+
     
     return {
       stringToDate: stringToDate,
