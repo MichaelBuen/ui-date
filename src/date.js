@@ -9,6 +9,10 @@ function addDateMinutes(date, minutes) {
 }
 
 function convertTimezoneToLocal(date, timezone, reverse) {
+        if (!date) {
+            return date;
+        }	
+	
 	reverse = reverse ? -1 : 1;
 	var dateTimezoneOffset = date.getTimezoneOffset();
 	var timezoneOffset = timezoneToOffset(timezone, dateTimezoneOffset);
